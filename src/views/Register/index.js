@@ -1,37 +1,29 @@
-import React, { useState } from "react"
-import { Link, withRouter } from "react-router-dom"
+import React, { useState } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 
-import {
-  Typography,
-  Paper,
-  Avatar,
-  Button,
-  FormControl,
-  Input,
-  InputLabel
-} from "@material-ui/core"
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
-import withStyles from "@material-ui/core/styles/withStyles"
+import { Typography, Paper, Avatar, Button, FormControl, Input, InputLabel } from '@material-ui/core'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import withStyles from '@material-ui/core/styles/withStyles'
 
-import firebase from "../../components/firebase"
+import firebase from '../../components/firebase'
 
 const styles = theme => ({
   main: {
-    width: "auto",
-    display: "block", // Fix IE 11 issue.
+    width: 'auto',
+    display: 'block', // Fix IE 11 issue.
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       width: 400,
-      marginLeft: "auto",
-      marginRight: "auto"
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }
   },
   paper: {
     marginTop: theme.spacing.unit * 8,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
   },
   avatar: {
@@ -39,7 +31,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit
   },
   submit: {
@@ -50,9 +42,9 @@ const styles = theme => ({
 function Register(props) {
   const { classes } = props
 
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   return (
     <main className={classes.main}>
@@ -77,13 +69,7 @@ function Register(props) {
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input
-              id="email"
-              name="email"
-              autoComplete="off"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
+            <Input id="email" name="email" autoComplete="off" value={email} onChange={e => setEmail(e.target.value)} />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
@@ -103,8 +89,7 @@ function Register(props) {
             variant="contained"
             color="primary"
             onClick={onRegister}
-            className={classes.submit}
-          >
+            className={classes.submit}>
             Register
           </Button>
 
@@ -115,8 +100,7 @@ function Register(props) {
             color="secondary"
             component={Link}
             to="/login"
-            className={classes.submit}
-          >
+            className={classes.submit}>
             Go back to Login
           </Button>
         </form>
@@ -127,7 +111,7 @@ function Register(props) {
   async function onRegister() {
     try {
       await firebase.register(name, email, password)
-      props.history.replace("/dashboard")
+      props.history.replace('/dashboard')
     } catch (error) {
       alert(error.message)
     }

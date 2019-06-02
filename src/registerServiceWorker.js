@@ -1,8 +1,8 @@
 export default function register() {
-  console.log("Register function")
+  console.log('Register function')
   console.log(process.env.NODE_ENV)
-  if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
+  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`
       console.log(swUrl)
       navigator.serviceWorker
@@ -11,25 +11,25 @@ export default function register() {
           registration.onupdatefound = () => {
             const installingWorker = registration.installing
             installingWorker.onstatechange = () => {
-              if (installingWorker.state === "installed") {
+              if (installingWorker.state === 'installed') {
                 if (navigator.serviceWorker.controller) {
-                  console.log("New content is available; please refresh.")
+                  console.log('New content is available; please refresh.')
                 } else {
-                  console.log("Content is cached for offline use.")
+                  console.log('Content is cached for offline use.')
                 }
               }
             }
           }
         })
         .catch(error => {
-          console.error("Error during service worker registration:", error)
+          console.error('Error during service worker registration:', error)
         })
     })
   }
 }
 
 export function unregister() {
-  if ("serviceWorker" in navigator) {
+  if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration => {
       registration.unregister()
     })

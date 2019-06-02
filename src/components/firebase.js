@@ -1,6 +1,6 @@
-import app from "firebase/app"
-import "firebase/auth"
-import "firebase/firebase-firestore"
+import app from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firebase-firestore'
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -36,7 +36,7 @@ class Firebase {
 
   addQuote(quote) {
     if (!this.auth.currentUser) {
-      return alert("Not authorized")
+      return alert('Not authorized')
     }
 
     return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({
@@ -56,7 +56,7 @@ class Firebase {
 
   async getCurrentUserQuote() {
     const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
-    return quote.get("quote")
+    return quote.get('quote')
   }
 }
 

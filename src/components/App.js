@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
 
-import "./styles.css"
-import firebase from "./firebase"
+import './styles.css'
+import firebase from './firebase'
 
-import Routes from "../routes"
+import Routes from '../routes'
 
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles"
-import { CssBaseline, CircularProgress } from "@material-ui/core"
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { CssBaseline, CircularProgress } from '@material-ui/core'
 
 const theme = createMuiTheme()
 

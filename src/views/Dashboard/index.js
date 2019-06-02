@@ -1,29 +1,29 @@
-import React from "react"
-import { withRouter } from "react-router-dom"
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-import { Typography, Paper, Avatar, Button } from "@material-ui/core"
-import VerifiedUserOutlined from "@material-ui/icons/VerifiedUserOutlined"
-import withStyles from "@material-ui/core/styles/withStyles"
+import { Typography, Paper, Avatar, Button } from '@material-ui/core'
+import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
+import withStyles from '@material-ui/core/styles/withStyles'
 
-import firebase from "../../components/firebase"
+import firebase from '../../components/firebase'
 
 const styles = theme => ({
   main: {
-    width: "auto",
-    display: "block", // Fix IE 11 issue.
+    width: 'auto',
+    display: 'block', // Fix IE 11 issue.
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
     [theme.breakpoints.up(400 + theme.spacing(6))]: {
       width: 400,
-      marginLeft: "auto",
-      marginRight: "auto"
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`
   },
   avatar: {
@@ -40,8 +40,8 @@ function Dashboard(props) {
 
   if (!firebase.getCurrentUsername()) {
     // not logged in
-    alert("Please login first")
-    props.history.replace("/login")
+    alert('Please login first')
+    props.history.replace('/login')
     return null
   }
 
@@ -60,8 +60,7 @@ function Dashboard(props) {
           variant="contained"
           color="secondary"
           onClick={logout}
-          className={classes.submit}
-        >
+          className={classes.submit}>
           Logout
         </Button>
       </Paper>
@@ -70,7 +69,7 @@ function Dashboard(props) {
 
   async function logout() {
     await firebase.logout()
-    props.history.push("/")
+    props.history.push('/')
   }
 }
 

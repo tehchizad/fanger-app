@@ -1,10 +1,10 @@
-import React, { Fragment } from "react"
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom"
+import React, { Fragment } from 'react'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
-import HomePage from "./views/Home"
-import Login from "./views/Login"
-import Register from "./views/Register"
-import Dashboard from "./views/Dashboard"
+import HomePage from './views/Home'
+import Login from './views/Login'
+import Register from './views/Register'
+import Dashboard from './views/Dashboard'
 
 const Routes = () => {
   return (
