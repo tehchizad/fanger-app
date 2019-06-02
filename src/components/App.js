@@ -12,7 +12,6 @@ const theme = createMuiTheme()
 
 export default function App() {
   const [firebaseInitialized, setFirebaseInitialized] = useState(false)
-
   useEffect(() => {
     firebase.isInitialized().then(val => {
       setFirebaseInitialized(val)
