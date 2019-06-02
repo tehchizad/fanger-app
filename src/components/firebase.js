@@ -3,13 +3,13 @@ import 'firebase/auth'
 import 'firebase/firebase-firestore'
 
 const config = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
-  appID: process.env.REACT_APP_FIREBASE_APP_ID
+  apiKey: 'AIzaSyAU-fJLjjAz6zFGhuaBUP2v6VIwa7YtotY',
+  authDomain: 'codettastone.firebaseapp.com',
+  databaseURL: 'https://codettastone.firebaseio.com',
+  projectId: 'codettastone',
+  storageBucket: 'codettastone.appspot.com',
+  messagingSenderId: '826170491074',
+  appId: '1:826170491074:web:b7d925d07ef1cc41'
 }
 
 class Firebase {
