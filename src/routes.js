@@ -1,24 +1,24 @@
-import React, { Fragment } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import React, { Fragment } from "react"
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom"
 
-import { Home } from './views/Home/Home'
-import { NoMatch } from './views/NoMatch/NoMatch'
-import { NavBar } from './components/NavBar/NavBar'
+import HomePage from "./views/Home"
+import Login from "./views/Login"
+import Register from "./views/Register"
+import Dashboard from "./views/Dashboard"
 
-import CssBaseline from '@material-ui/core/CssBaseline'
-
-export const Routes = () => {
+const Routes = () => {
   return (
     <Fragment>
-      <CssBaseline />
-      <NavBar />
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/Home" />
-        </Route>
-        <Route exact path="/Home" component={Home} />
-        <Route component={NoMatch} />
-      </Switch>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/dashboard" component={Dashboard} />
+        </Switch>
+      </Router>
     </Fragment>
   )
 }
+
+export default Routes
