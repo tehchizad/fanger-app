@@ -39,7 +39,9 @@ class Firebase {
       return alert("Not authorized")
     }
 
-    return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({ quote })
+    return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({
+      quote
+    })
   }
 
   isInitialized() {
