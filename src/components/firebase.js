@@ -3,8 +3,8 @@ import 'firebase/auth'
 import 'firebase/firebase-firestore'
 
 const config = {
-  apiKey: 'AIzaSyAU-fJLjjAz6zFGhuaBUP2v6VIwa7YtotY',
-  authDomain: 'codettastone.firebaseapp.com',
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
   databaseURL: 'https://codettastone.firebaseio.com',
   projectId: 'codettastone',
   storageBucket: 'codettastone.appspot.com',
