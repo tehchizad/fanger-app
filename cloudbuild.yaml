@@ -7,15 +7,6 @@ steps:
     args: ['push', 'gcr.io/$PROJECT_ID/fanger-app']
     # Deploy container image to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-    - kms
-    - decrypt
-    - --ciphertext-file=.env.enc
-    - --plaintext-file=.env
-    - --location=global
-    - --keyring=fanger-app-keyring
-    - --key=cloudbuild-env
-  - name: 'gcr.io/cloud-builders/gcloud'
     args: ['beta', 'run', 'deploy', 'fanger-app', '--image', 'gcr.io/$PROJECT_ID/fanger-app', '--region', 'us-central1']
   images:
   - gcr.io/$PROJECT_ID/fanger-app

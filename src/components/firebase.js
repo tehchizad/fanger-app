@@ -5,13 +5,13 @@ import 'firebase/firebase-firestore'
 // gcloud kms encrypt --plaintext-file=.env --ciphertext-file=.env.enc --location=global --keyring=fanger-app-keyring --key=cloudbuild-env
 
 const config = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  apiKey: 'AIzaSyAU-fJLjjAz6zFGhuaBUP2v6VIwa7YtotY',
+  authDomain: 'codettastone.firebaseapp.com',
   databaseURL: 'https://codettastone.firebaseio.com',
   projectId: 'codettastone',
   storageBucket: 'codettastone.appspot.com',
   messagingSenderId: '826170491074',
-  appId: '1:826170491074:web:b7d925d07ef1cc41'
+  appId: '1:826170491074:web:d207380dba55ef1b'
 }
 
 class Firebase {
