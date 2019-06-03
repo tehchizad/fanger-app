@@ -2,6 +2,8 @@ import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
 
+// gcloud kms encrypt --plaintext-file=.env --ciphertext-file=.env.enc --location=global --keyring=fanger-app-keyring --key=cloudbuild-env
+
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
