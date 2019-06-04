@@ -5,7 +5,7 @@ import { Typography, Paper, Avatar, Button, FormControl, Input, InputLabel } fro
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import firebase from '../../components/firebase'
+import firebase from '../../utilities/Firebase/firebase'
 
 const styles = theme => ({
   main: {

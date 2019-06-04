@@ -5,7 +5,7 @@ import { Typography, Paper, Avatar, Button } from '@material-ui/core'
 import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import firebase from '../../components/firebase'
+import firebase from '../../utilities/Firebase/firebase'
 
 const styles = theme => ({
   main: {

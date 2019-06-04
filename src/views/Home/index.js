@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { withAuthorization } from '../../utilities/Session'
+
 import { Typography, Paper, Avatar, Button } from '@material-ui/core'
 import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
@@ -43,7 +45,7 @@ function HomePage(props) {
           <VerifiedUserOutlined />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Hello Guest!
+          Welcome
         </Typography>
         <Button
           type="submit"
@@ -79,5 +81,7 @@ function HomePage(props) {
     </main>
   )
 }
+// If authUser is not null (basically anyone logged in)
+const condition = authUser => !!authUser
 
-export default withStyles(styles)(HomePage)
+export default withAuthorization(condition)(withStyles(styles)(HomePage))
