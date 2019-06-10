@@ -214,5 +214,6 @@ const condition = authUser => !!authUser
 
 export default compose(
   withEmailVerification,
-  withAuthorization(condition)
+  withAuthorization(condition),
+  withFirebase
 )(AccountPage)
