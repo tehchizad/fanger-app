@@ -23,6 +23,9 @@ const INITIAL_STATE = {
   error: null
 }
 
+const ERROR_CODE_ACCOUNT_EXISTS = 'auth/account-exists-with-different-credential'
+const ERROR_MSG_ACCOUNT_EXISTS = `An account with an E-Mail address to this social account already exists. Try to login from this account instead and associate your social accounts on your personal account page.`
+
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props)
@@ -45,13 +48,19 @@ class SignUpFormBase extends Component {
           .user(authUser.user.uid)
           .set({ username, email, roles })
       })
+      .then(() => {
+        return this.props.firebase.doSendEmailVerification()
+      })
+
       //  Reset state & route home
-      .then(authUser => {
+      .then(() => {
         this.setState({ ...INITIAL_STATE })
         this.props.history.push(ROUTES.HOME)
       })
       .catch(error => {
-        this.setState({ error })
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+          error.message = ERROR_MSG_ACCOUNT_EXISTS
+        }
       })
     e.preventDefault()
   }
