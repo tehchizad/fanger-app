@@ -15,17 +15,12 @@ import Navigation from '../../components/Navigation'
 import * as ROUTES from '../../utilities/routes'
 import { withAuthentication } from '../../utilities/Session'
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { CssBaseline } from '@material-ui/core'
-
-const theme = createMuiTheme()
+import { Container } from 'semantic-ui-react'
 
 const App = () => (
-  <Router>
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
+  <Container>
+    <Router>
       <Navigation />
-      <hr />
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
@@ -33,8 +28,8 @@ const App = () => (
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
-    </MuiThemeProvider>
-  </Router>
+    </Router>
+  </Container>
 )
 
 export default withAuthentication(App)

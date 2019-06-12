@@ -7,16 +7,29 @@ import { UserList, UserItem } from '../Users'
 import * as ROLES from '../../utilities/roles'
 import * as ROUTES from '../../utilities/routes'
 
-const AdminPage = () => (
-  <div>
-    <h1>Admin</h1>
-    <p>The Admin Page is accessible by every signed in admin user.</p>
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+  Container
+} from 'semantic-ui-react'
 
-    <Switch>
-      <Route exact path={ROUTES.ADMIN_DETAILS} component={UserItem} />
-      <Route exact path={ROUTES.ADMIN} component={UserList} />
-    </Switch>
-  </div>
+const AdminPage = () => (
+  <Grid centered columns={2}>
+    <Grid.Column>
+      <Header as="h2" textAlign="center">
+        Admin
+      </Header>
+      <p>The Admin Page is accessible by every signed in admin user.</p>
+      <Switch>
+        <Route exact path={ROUTES.ADMIN_DETAILS} component={UserItem} />
+        <Route exact path={ROUTES.ADMIN} component={UserList} />
+      </Switch>
+    </Grid.Column>
+  </Grid>
 )
 
 const condition = authUser => authUser && !!authUser.roles[ROLES.ADMIN]

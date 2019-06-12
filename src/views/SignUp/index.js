@@ -7,11 +7,25 @@ import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 import * as ROLES from '../../utilities/roles'
 
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+  Container
+} from 'semantic-ui-react'
+
 const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
-    <SignUpForm />
-  </div>
+  <Grid centered columns={2}>
+    <Grid.Column>
+      <Header as="h2" textAlign="center">
+        Sign Up
+      </Header>
+      <SignUpForm />
+    </Grid.Column>
+  </Grid>
 )
 
 const INITIAL_STATE = {
@@ -82,50 +96,49 @@ class SignUpFormBase extends Component {
       username === ''
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form onSubmit={this.onSubmit}>
+        <Form.Input
           name="username"
           value={username}
           onChange={this.onChange}
           type="text"
           placeholder="Full Name"
         />
-        <input
+        <Form.Input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <Form.Input
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-        <input
+        <Form.Input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
           placeholder="Confirm Password"
         />
-        <label>
+        {/* <label>
           Admin:
-          <input
+          <Form.Input
             name="isAdmin"
             type="checkbox"
             checked={isAdmin}
             onChange={this.onChangeCheckbox}
           />
-        </label>
-
-        <button disabled={isInvalid} type="submit">
+        </label> */}
+        <Button disabled={isInvalid} type="submit">
           Sign Up
-        </button>
+        </Button>
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     )
   }
 }

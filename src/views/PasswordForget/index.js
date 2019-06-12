@@ -4,11 +4,21 @@ import { Link } from 'react-router-dom'
 import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+  Container
+} from 'semantic-ui-react'
+
 const PasswordForgetPage = () => (
-  <div>
+  <Container>
     <h1>PasswordForget</h1>
     <PasswordForgetForm />
-  </div>
+  </Container>
 )
 
 const INITIAL_STATE = {
@@ -44,18 +54,22 @@ class PasswordForgetFormBase extends Component {
 
   render() {
     const { email, error } = this.state
-
     const isInvalid = email === ''
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input name="email" value={this.state.email} onChange={this.onChange} type="text" placeholder="Email Address" />
-        <button disabled={isInvalid} type="submit">
+      <Form onSubmit={this.onSubmit}>
+        <Form.Input
+          name="email"
+          value={this.state.email}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Email Address"
+        />
+        <Button disabled={isInvalid} type="submit">
           Reset My Password
-        </button>
-
+        </Button>
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     )
   }
 }

@@ -7,47 +7,49 @@ import { AuthUserContext } from '../../utilities/Session'
 import * as ROUTES from '../../utilities/routes'
 import * as ROLES from '../../utilities/roles'
 
+import { Container, Menu } from 'semantic-ui-react'
+
 const Navigation = () => (
-  <div>
+  <Menu tabular>
     <AuthUserContext.Consumer>
       {authUser =>
         authUser ? <NavigationAuth authUser={authUser} /> : <NavigationNonAuth />
       }
     </AuthUserContext.Consumer>
-  </div>
+  </Menu>
 )
 
 const NavigationAuth = ({ authUser }) => (
-  <ul>
-    <li>
+  <Menu.Menu position="right">
+    <Menu.Item>
       <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-    <li>
+    </Menu.Item>
+    <Menu.Item>
       <Link to={ROUTES.HOME}>Home</Link>
-    </li>
-    <li>
+    </Menu.Item>
+    <Menu.Item>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
-    </li>
+    </Menu.Item>
     {!!authUser.roles[ROLES.ADMIN] && (
-      <li>
+      <Menu.Item>
         <Link to={ROUTES.ADMIN}>Admin</Link>
-      </li>
+      </Menu.Item>
     )}
-    <li>
+    <Menu.Item>
       <SignOutButton />
-    </li>
-  </ul>
+    </Menu.Item>
+  </Menu.Menu>
 )
 
 const NavigationNonAuth = () => (
-  <ul>
-    <li>
+  <Menu.Menu position="right">
+    <Menu.Item>
       <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-    <li>
+    </Menu.Item>
+    <Menu.Item>
       <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-    </li>
-  </ul>
+    </Menu.Item>
+  </Menu.Menu>
 )
 
 export default Navigation

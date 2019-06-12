@@ -8,16 +8,30 @@ import { PasswordForgetLink } from '../PasswordForget'
 import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+  Container
+} from 'semantic-ui-react'
+
 const SignInPage = () => (
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm />
-    <SignInGoogle />
-    <SignInFacebook />
-    <SignInTwitter />
-    <PasswordForgetLink />
-    <SignUpLink />
-  </div>
+  <Grid centered columns={2}>
+    <Grid.Column>
+      <Header as="h2" textAlign="center">
+        Sign In
+      </Header>
+      <SignInForm />
+      <Container text>
+        <SignInGoogle />
+        <SignInFacebook />
+        <SignInTwitter />
+      </Container>
+    </Grid.Column>
+  </Grid>
 )
 
 const INITIAL_STATE = {
@@ -58,30 +72,35 @@ class SignInFormBase extends Component {
 
   render() {
     const { email, password, error } = this.state
-
     const isInvalid = password === '' || email === ''
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
-        {error && <p>{error.message}</p>}
-      </form>
+      <Segment>
+        <Form onSubmit={this.onSubmit}>
+          <Form.Input
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+          />
+          <Form.Input
+            name="password"
+            value={password}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+          <Button size="tiny" disabled={isInvalid} type="submit">
+            Sign In
+          </Button>
+          {error && <p>{error.message}</p>}
+        </Form>
+        <Message>
+          <SignUpLink />
+          <PasswordForgetLink />
+        </Message>
+      </Segment>
     )
   }
 }
@@ -118,10 +137,10 @@ class SignInGoogleBase extends Component {
   render() {
     const { error } = this.state
     return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Google</button>
+      <Form onSubmit={this.onSubmit}>
+        <Button content="Sign In" icon="google" type="submit" />
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     )
   }
 }
@@ -158,10 +177,10 @@ class SignInFacebookBase extends Component {
   render() {
     const { error } = this.state
     return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Facebook</button>
+      <Form onSubmit={this.onSubmit}>
+        <Button content="Sign In" icon="facebook f" type="submit" />
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     )
   }
 }
@@ -198,10 +217,10 @@ class SignInTwitterBase extends Component {
   render() {
     const { error } = this.state
     return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Twitter</button>
+      <Form onSubmit={this.onSubmit}>
+        <Button content="Sign In" icon="twitter" type="submit" />
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     )
   }
 }

@@ -10,6 +10,16 @@ import { withFirebase } from '../../utilities/Firebase'
 import { PasswordForgetForm } from '../PasswordForget'
 import PasswordChangeForm from '../PasswordChange'
 
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+  Container
+} from 'semantic-ui-react'
+
 const SIGN_IN_METHODS = [
   {
     id: 'password',
@@ -32,12 +42,17 @@ const SIGN_IN_METHODS = [
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <div>
-        <h1>Account: {authUser.email}</h1>
-        <PasswordForgetForm />
-        <PasswordChangeForm />
-        <LoginManagement authUser={authUser} />
-      </div>
+      <Grid centered columns={2}>
+        <Grid.Column>
+          <Header as="h2" textAlign="center">
+            Account: {authUser.email}
+          </Header>
+          <PasswordForgetForm />
+          <br />
+          <PasswordChangeForm />
+          <LoginManagement authUser={authUser} />
+        </Grid.Column>
+      </Grid>
     )}
   </AuthUserContext.Consumer>
 )
@@ -95,38 +110,35 @@ class LoginManagementBase extends Component {
     const { activeSignInMethods, error } = this.state
 
     return (
-      <div>
-        Sign In Methods:
-        <ul>
-          {SIGN_IN_METHODS.map(signInMethod => {
-            const onlyOneLeft = activeSignInMethods.length === 1
-            const isEnabled = activeSignInMethods.includes(signInMethod.id)
+      <Message>
+        {SIGN_IN_METHODS.map(signInMethod => {
+          const onlyOneLeft = activeSignInMethods.length === 1
+          const isEnabled = activeSignInMethods.includes(signInMethod.id)
 
-            return (
-              <li key={signInMethod.id}>
-                {signInMethod.id === 'password' ? (
-                  <DefaultLoginToggle
-                    onlyOneLeft={onlyOneLeft}
-                    isEnabled={isEnabled}
-                    signInMethod={signInMethod}
-                    onLink={this.onDefaultLoginLink}
-                    onUnlink={this.onUnlink}
-                  />
-                ) : (
-                  <SocialLoginToggle
-                    onlyOneLeft={onlyOneLeft}
-                    isEnabled={isEnabled}
-                    signInMethod={signInMethod}
-                    onLink={this.onSocialLoginLink}
-                    onUnlink={this.onUnlink}
-                  />
-                )}
-              </li>
-            )
-          })}
-        </ul>
+          return (
+            <Button key={signInMethod.id}>
+              {signInMethod.id === 'password' ? (
+                <DefaultLoginToggle
+                  onlyOneLeft={onlyOneLeft}
+                  isEnabled={isEnabled}
+                  signInMethod={signInMethod}
+                  onLink={this.onDefaultLoginLink}
+                  onUnlink={this.onUnlink}
+                />
+              ) : (
+                <SocialLoginToggle
+                  onlyOneLeft={onlyOneLeft}
+                  isEnabled={isEnabled}
+                  signInMethod={signInMethod}
+                  onLink={this.onSocialLoginLink}
+                  onUnlink={this.onUnlink}
+                />
+              )}
+            </Button>
+          )
+        })}
         {error && error.message}
-      </div>
+      </Message>
     )
   }
 }
@@ -139,16 +151,16 @@ const SocialLoginToggle = ({
   onUnlink
 }) =>
   isEnabled ? (
-    <button
-      type="button"
+    <Button
+      type="B"
       onClick={() => onUnlink(signInMethod.id)}
       disabled={onlyOneLeft}>
       Deactivate {signInMethod.id}
-    </button>
+    </Button>
   ) : (
-    <button type="button" onClick={() => onLink(signInMethod.provider)}>
+    <Button onClick={() => onLink(signInMethod.provider)}>
       Link {signInMethod.id}
-    </button>
+    </Button>
   )
 
 class DefaultLoginToggle extends Component {
@@ -171,39 +183,33 @@ class DefaultLoginToggle extends Component {
 
   render() {
     const { onlyOneLeft, isEnabled, signInMethod, onUnlink } = this.props
-
     const { passwordOne, passwordTwo } = this.state
-
     const isInvalid = passwordOne !== passwordTwo || passwordOne === ''
 
     return isEnabled ? (
-      <button
-        type="button"
-        onClick={() => onUnlink(signInMethod.id)}
-        disabled={onlyOneLeft}>
+      <Button onClick={() => onUnlink(signInMethod.id)} disabled={onlyOneLeft}>
         Deactivate {signInMethod.id}
-      </button>
+      </Button>
     ) : (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form onSubmit={this.onSubmit}>
+        <Form.Input
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
           placeholder="New Password"
         />
-        <input
+        <Form.Input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
           placeholder="Confirm New Password"
         />
-
-        <button disabled={isInvalid} type="submit">
+        <Button disabled={isInvalid} type="submit">
           Link {signInMethod.id}
-        </button>
-      </form>
+        </Button>
+      </Form>
     )
   }
 }
