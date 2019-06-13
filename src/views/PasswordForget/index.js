@@ -4,15 +4,7 @@ import { Link } from 'react-router-dom'
 import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment,
-  Container
-} from 'semantic-ui-react'
+import { Button, Form, Container } from 'semantic-ui-react'
 
 const PasswordForgetPage = () => (
   <Container>

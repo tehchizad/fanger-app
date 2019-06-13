@@ -2,15 +2,7 @@ import React, { Component } from 'react'
 
 import { withFirebase } from '../../utilities/Firebase'
 
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment,
-  Container
-} from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 
 const INITIAL_STATE = {
   passwordOne: '',

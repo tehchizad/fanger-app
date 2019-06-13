@@ -7,15 +7,7 @@ import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 import * as ROLES from '../../utilities/roles'
 
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment,
-  Container
-} from 'semantic-ui-react'
+import { Button, Form, Grid, Header } from 'semantic-ui-react'
 
 const SignUpPage = () => (
   <Grid centered columns={2}>
@@ -88,7 +80,7 @@ class SignUpFormBase extends Component {
   }
 
   render() {
-    const { username, email, passwordOne, passwordTwo, isAdmin, error } = this.state
+    const { username, email, passwordOne, passwordTwo, error } = this.state
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||

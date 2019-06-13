@@ -7,15 +7,7 @@ import { UserList, UserItem } from '../Users'
 import * as ROLES from '../../utilities/roles'
 import * as ROUTES from '../../utilities/routes'
 
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment,
-  Container
-} from 'semantic-ui-react'
+import { Grid, Header } from 'semantic-ui-react'
 
 const AdminPage = () => (
   <Grid centered columns={2}>

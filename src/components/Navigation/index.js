@@ -7,7 +7,7 @@ import { AuthUserContext } from '../../utilities/Session'
 import * as ROUTES from '../../utilities/routes'
 import * as ROLES from '../../utilities/roles'
 
-import { Container, Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 const Navigation = () => (
   <Menu tabular>
