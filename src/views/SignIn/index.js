@@ -8,29 +8,23 @@ import { PasswordForgetLink } from '../PasswordForget'
 import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment,
-  Container
-} from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
 const SignInPage = () => (
-  <Grid centered columns={2}>
-    <Grid.Column>
-      <Header as="h2" textAlign="center">
-        Sign In
-      </Header>
-      <SignInForm />
-      <Container text>
-        <SignInGoogle />
-        <SignInFacebook />
-        <SignInTwitter />
-      </Container>
-    </Grid.Column>
+  <Grid centered columns={3}>
+    <Grid.Row>
+      <Grid.Column style={{ paddingTop: '2em' }}>
+        <Header as="h1" textAlign="center">
+          Sign In
+        </Header>
+        <SignInForm />
+      </Grid.Column>
+    </Grid.Row>
+    <Grid.Row>
+      <SignInGoogle />
+      <SignInFacebook />
+      <SignInTwitter />
+    </Grid.Row>
   </Grid>
 )
 
@@ -91,7 +85,7 @@ class SignInFormBase extends Component {
             type="password"
             placeholder="Password"
           />
-          <Button size="tiny" disabled={isInvalid} type="submit">
+          <Button disabled={isInvalid} type="submit" color="black" fluid>
             Sign In
           </Button>
           {error && <p>{error.message}</p>}
@@ -138,7 +132,13 @@ class SignInGoogleBase extends Component {
     const { error } = this.state
     return (
       <Form onSubmit={this.onSubmit}>
-        <Button content="Sign In" icon="google" type="submit" />
+        <Button
+          size="tiny"
+          color="google plus"
+          content="Sign In"
+          icon="google"
+          type="submit"
+        />
         {error && <p>{error.message}</p>}
       </Form>
     )
@@ -178,7 +178,13 @@ class SignInFacebookBase extends Component {
     const { error } = this.state
     return (
       <Form onSubmit={this.onSubmit}>
-        <Button content="Sign In" icon="facebook f" type="submit" />
+        <Button
+          size="tiny"
+          color="facebook"
+          content="Sign In"
+          icon="facebook f"
+          type="submit"
+        />
         {error && <p>{error.message}</p>}
       </Form>
     )
@@ -218,7 +224,13 @@ class SignInTwitterBase extends Component {
     const { error } = this.state
     return (
       <Form onSubmit={this.onSubmit}>
-        <Button content="Sign In" icon="twitter" type="submit" />
+        <Button
+          size="tiny"
+          color="twitter"
+          content="Sign In"
+          icon="twitter"
+          type="submit"
+        />
         {error && <p>{error.message}</p>}
       </Form>
     )

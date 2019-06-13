@@ -10,7 +10,7 @@ import { withFirebase } from '../../utilities/Firebase'
 import { PasswordForgetForm } from '../PasswordForget'
 import PasswordChangeForm from '../PasswordChange'
 
-import { Button, Form, Grid, Header, Message } from 'semantic-ui-react'
+import { Button, Form, Container, Grid, Header, Message } from 'semantic-ui-react'
 
 const SIGN_IN_METHODS = [
   {
@@ -108,7 +108,7 @@ class LoginManagementBase extends Component {
           const isEnabled = activeSignInMethods.includes(signInMethod.id)
 
           return (
-            <Button key={signInMethod.id}>
+            <Container key={signInMethod.id}>
               {signInMethod.id === 'password' ? (
                 <DefaultLoginToggle
                   onlyOneLeft={onlyOneLeft}
@@ -126,7 +126,7 @@ class LoginManagementBase extends Component {
                   onUnlink={this.onUnlink}
                 />
               )}
-            </Button>
+            </Container>
           )
         })}
         {error && error.message}

@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import App from './components/App'
 import Firebase, { FirebaseContext } from './utilities/Firebase'
 
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
@@ -14,4 +14,4 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-registerServiceWorker()
+// registerServiceWorker()
