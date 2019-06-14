@@ -97,11 +97,7 @@ class SignInFormBase extends Component {
             Sign In
           </Button>
           <br />
-          {error && (
-            <Label basic color="red">
-              {error.message}
-            </Label>
-          )}
+          {error && <Message negative>{error.message}</Message>}
         </Form>
         <Message>
           <SignUpLink />
