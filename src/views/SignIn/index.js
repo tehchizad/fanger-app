@@ -8,7 +8,15 @@ import { PasswordForgetLink } from '../PasswordForget'
 import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import {
+  Button,
+  Label,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment
+} from 'semantic-ui-react'
 
 const SignInPage = () => (
   <Grid centered columns={3}>
@@ -88,7 +96,12 @@ class SignInFormBase extends Component {
           <Button disabled={isInvalid} type="submit" color="black" fluid>
             Sign In
           </Button>
-          {error && <p>{error.message}</p>}
+          <br />
+          {error && (
+            <Label basic color="red">
+              {error.message}
+            </Label>
+          )}
         </Form>
         <Message>
           <SignUpLink />
