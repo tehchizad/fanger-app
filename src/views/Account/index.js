@@ -7,14 +7,18 @@ import {
   withEmailVerification
 } from '../../utilities/Session'
 import { withFirebase } from '../../utilities/Firebase'
-import PasswordChangeForm from '../PasswordChange'
+
+import PasswordChangeForm from './ChangePassword'
+import SignOutButton from '../../components/SignOut'
 
 import { Button, Form, Grid, Header, Message } from 'semantic-ui-react'
 
 const SIGN_IN_METHODS = [
   {
     id: 'password',
-    provider: null
+    provider: null,
+    icon: 'mail',
+    color: 'green'
   },
   {
     id: 'google.com',
@@ -33,8 +37,8 @@ const SIGN_IN_METHODS = [
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <Grid centered columns={2}>
-        <Grid.Row>
+      <Grid centered>
+        <Grid.Row style={{ maxWidth: 450 }}>
           <Grid.Column style={{ paddingTop: '2em' }}>
             <Header as="h1" textAlign="center">
               Account Management
@@ -43,7 +47,8 @@ const AccountPage = () => (
             <PasswordChangeForm />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
+        <Grid.Row style={{ maxWidth: 450 }}>
+          <SignOutButton />
           <LoginManagement authUser={authUser} />
         </Grid.Row>
       </Grid>
@@ -140,7 +145,7 @@ const SocialLoginToggle = ({
       disabled={onlyOneLeft}
       color={signInMethod.color}
       icon={signInMethod.icon}
-      content="Deactivate"
+      content="Unlink"
     />
   ) : (
     <Button

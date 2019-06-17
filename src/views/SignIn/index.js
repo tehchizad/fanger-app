@@ -19,17 +19,19 @@ const INITIAL_STATE = {
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/account-exists-with-different-credential'
 const ERROR_MSG_ACCOUNT_EXISTS = `An account with an E-Mail address to this social account already exists. Try to login from this account instead and associate your social accounts on your personal account page.`
 
-const SignInPage = INITIAL_STATE => (
-  <Grid centered columns={2}>
-    <Grid.Row>
+const SignInPage = () => (
+  <Grid textAlign="center" style={{ paddingTop: '10vh' }} verticalAlign="middle">
+    <Grid.Row style={{ maxWidth: 450 }}>
       <Grid.Column style={{ paddingTop: '2em' }}>
         <Header as="h1" textAlign="center">
-          Sign In
+          <i className="barcode icon" />
+          App
         </Header>
         <SignInForm />
+        <SignUpLink />
       </Grid.Column>
     </Grid.Row>
-    <Grid.Row>
+    <Grid.Row style={{ padding: 0 }}>
       <SignInGoogle />
       <SignInFacebook />
     </Grid.Row>
@@ -49,7 +51,7 @@ class SignInFormBase extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE })
-        this.props.history.push(ROUTES.HOME)
+        this.props.history.push(ROUTES.LANDING)
       })
       .catch(error => {
         this.setState({ error })
@@ -65,31 +67,37 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === ''
 
     return (
-      <Segment>
+      <Segment stacked>
         <Form onSubmit={this.onSubmit}>
           <Form.Input
+            fluid
+            icon="user"
+            iconPosition="left"
             name="email"
             value={email}
             onChange={this.onChange}
             type="text"
-            placeholder="Email Address"
+            placeholder="Email"
           />
           <Form.Input
+            fluid
+            icon="lock"
+            iconPosition="left"
             name="password"
             value={password}
             onChange={this.onChange}
             type="password"
             placeholder="Password"
           />
-          <Button disabled={isInvalid} type="submit" color="black" fluid>
+          <Button fluid disabled={isInvalid} type="submit" color="black">
             Sign In
           </Button>
-          {error && <Message negative>{error.message}</Message>}
+          {error && (
+            <Message negative>
+              {error.message} <PasswordForgetLink />
+            </Message>
+          )}
         </Form>
-        <Message>
-          <SignUpLink />
-          <PasswordForgetLink />
-        </Message>
       </Segment>
     )
   }
@@ -115,7 +123,7 @@ class SignInGoogleBase extends Component {
       })
       .then(() => {
         this.setState({ error: null })
-        this.props.history.push(ROUTES.HOME)
+        this.props.history.push(ROUTES.LANDING)
       })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
@@ -162,7 +170,7 @@ class SignInFacebookBase extends Component {
       })
       .then(() => {
         this.setState({ error: null })
-        this.props.history.push(ROUTES.HOME)
+        this.props.history.push(ROUTES.LANDING)
       })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
@@ -209,7 +217,7 @@ class SignInTwitterBase extends Component {
       })
       .then(() => {
         this.setState({ error: null })
-        this.props.history.push(ROUTES.HOME)
+        this.props.history.push(ROUTES.LANDING)
       })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {

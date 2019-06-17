@@ -7,7 +7,7 @@ import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 import * as ROLES from '../../utilities/roles'
 
-import { Button, Form, Grid, Message, Header } from 'semantic-ui-react'
+import { Button, Segment, Form, Grid, Message, Header } from 'semantic-ui-react'
 
 const INITIAL_STATE = {
   username: '',
@@ -22,8 +22,8 @@ const ERROR_CODE_ACCOUNT_EXISTS = 'auth/account-exists-with-different-credential
 const ERROR_MSG_ACCOUNT_EXISTS = `An account with an E-Mail address to this social account already exists. Try to login from this account instead and associate your social accounts on your personal account page.`
 
 const SignUpPage = () => (
-  <Grid centered columns={2}>
-    <Grid.Row>
+  <Grid textAlign="center" style={{ paddingTop: '10vh' }} verticalAlign="middle">
+    <Grid.Row style={{ maxWidth: 450 }}>
       <Grid.Column style={{ paddingTop: '2em' }}>
         <Header as="h1" textAlign="center">
           Sign Up
@@ -62,7 +62,7 @@ class SignUpFormBase extends Component {
       //  Reset state & route home
       .then(() => {
         this.setState({ ...INITIAL_STATE })
-        this.props.history.push(ROUTES.HOME)
+        this.props.history.push(ROUTES.LANDING)
       })
       .catch(error => {
         this.setState({ error })
@@ -87,48 +87,50 @@ class SignUpFormBase extends Component {
       username === ''
 
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Form.Input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <Form.Input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <Form.Input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <Form.Input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <Button disabled={isInvalid} type="submit" color="black" fluid>
-          Sign Up
-        </Button>
-        {error && <Message negative>{error.message}</Message>}
-      </Form>
+      <Segment stacked>
+        <Form onSubmit={this.onSubmit}>
+          <Form.Input
+            name="username"
+            value={username}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Full Name"
+          />
+          <Form.Input
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+          />
+          <Form.Input
+            name="passwordOne"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+          <Form.Input
+            name="passwordTwo"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm Password"
+          />
+          <Button disabled={isInvalid} type="submit" color="black" fluid>
+            Sign Up
+          </Button>
+          {error && <Message negative>{error.message}</Message>}
+        </Form>
+      </Segment>
     )
   }
 }
 
 const SignUpLink = () => (
-  <p>
+  <Message>
     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </p>
+  </Message>
 )
 
 const SignUpForm = compose(
