@@ -7,10 +7,9 @@ import {
   withEmailVerification
 } from '../../utilities/Session'
 import { withFirebase } from '../../utilities/Firebase'
-import { PasswordForgetForm } from '../PasswordForget'
 import PasswordChangeForm from '../PasswordChange'
 
-import { Button, Form, Container, Grid, Header, Message } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message } from 'semantic-ui-react'
 
 const SIGN_IN_METHODS = [
   {
@@ -19,15 +18,15 @@ const SIGN_IN_METHODS = [
   },
   {
     id: 'google.com',
-    provider: 'googleProvider'
+    provider: 'googleProvider',
+    icon: 'google',
+    color: 'google plus'
   },
   {
     id: 'facebook.com',
-    provider: 'facebookProvider'
-  },
-  {
-    id: 'twitter.com',
-    provider: 'twitterProvider'
+    provider: 'facebookProvider',
+    icon: 'facebook f',
+    color: 'facebook'
   }
 ]
 
@@ -35,15 +34,18 @@ const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <Grid centered columns={2}>
-        <Grid.Column>
-          <Header as="h2" textAlign="center">
-            Account: {authUser.email}
-          </Header>
-          <PasswordForgetForm />
-          <br />
-          <PasswordChangeForm />
+        <Grid.Row>
+          <Grid.Column style={{ paddingTop: '2em' }}>
+            <Header as="h1" textAlign="center">
+              Account Management
+            </Header>
+            <Header textAlign="center">{authUser.email}</Header>
+            <PasswordChangeForm />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
           <LoginManagement authUser={authUser} />
-        </Grid.Column>
+        </Grid.Row>
       </Grid>
     )}
   </AuthUserContext.Consumer>
@@ -102,35 +104,24 @@ class LoginManagementBase extends Component {
     const { activeSignInMethods, error } = this.state
 
     return (
-      <Message>
+      <Form>
         {SIGN_IN_METHODS.map(signInMethod => {
           const onlyOneLeft = activeSignInMethods.length === 1
           const isEnabled = activeSignInMethods.includes(signInMethod.id)
 
           return (
-            <Container key={signInMethod.id}>
-              {signInMethod.id === 'password' ? (
-                <DefaultLoginToggle
-                  onlyOneLeft={onlyOneLeft}
-                  isEnabled={isEnabled}
-                  signInMethod={signInMethod}
-                  onLink={this.onDefaultLoginLink}
-                  onUnlink={this.onUnlink}
-                />
-              ) : (
-                <SocialLoginToggle
-                  onlyOneLeft={onlyOneLeft}
-                  isEnabled={isEnabled}
-                  signInMethod={signInMethod}
-                  onLink={this.onSocialLoginLink}
-                  onUnlink={this.onUnlink}
-                />
-              )}
-            </Container>
+            <SocialLoginToggle
+              key={signInMethod.id}
+              onlyOneLeft={onlyOneLeft}
+              isEnabled={isEnabled}
+              signInMethod={signInMethod}
+              onLink={this.onSocialLoginLink}
+              onUnlink={this.onUnlink}
+            />
           )
         })}
-        {error && error.message}
-      </Message>
+        {error && <Message negative>{error.message}</Message>}
+      </Form>
     )
   }
 }
@@ -144,70 +135,24 @@ const SocialLoginToggle = ({
 }) =>
   isEnabled ? (
     <Button
-      type="B"
       onClick={() => onUnlink(signInMethod.id)}
-      disabled={onlyOneLeft}>
-      Deactivate {signInMethod.id}
-    </Button>
+      size="tiny"
+      disabled={onlyOneLeft}
+      color={signInMethod.color}
+      icon={signInMethod.icon}
+      content="Deactivate"
+    />
   ) : (
-    <Button onClick={() => onLink(signInMethod.provider)}>
-      Link {signInMethod.id}
-    </Button>
+    <Button
+      onClick={() => onLink(signInMethod.provider)}
+      size="tiny"
+      color={signInMethod.color}
+      icon={signInMethod.icon}
+      content="Link"
+    />
   )
 
-class DefaultLoginToggle extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = { passwordOne: '', passwordTwo: '' }
-  }
-
-  onSubmit = event => {
-    event.preventDefault()
-
-    this.props.onLink(this.state.passwordOne)
-    this.setState({ passwordOne: '', passwordTwo: '' })
-  }
-
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
-  render() {
-    const { onlyOneLeft, isEnabled, signInMethod, onUnlink } = this.props
-    const { passwordOne, passwordTwo } = this.state
-    const isInvalid = passwordOne !== passwordTwo || passwordOne === ''
-
-    return isEnabled ? (
-      <Button onClick={() => onUnlink(signInMethod.id)} disabled={onlyOneLeft}>
-        Deactivate {signInMethod.id}
-      </Button>
-    ) : (
-      <Form onSubmit={this.onSubmit}>
-        <Form.Input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="New Password"
-        />
-        <Form.Input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm New Password"
-        />
-        <Button disabled={isInvalid} type="submit">
-          Link {signInMethod.id}
-        </Button>
-      </Form>
-    )
-  }
-}
-
 const LoginManagement = withFirebase(LoginManagementBase)
-
 const condition = authUser => !!authUser
 
 export default compose(

@@ -7,18 +7,7 @@ import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 import * as ROLES from '../../utilities/roles'
 
-import { Button, Form, Grid, Header } from 'semantic-ui-react'
-
-const SignUpPage = () => (
-  <Grid centered columns={2}>
-    <Grid.Column>
-      <Header as="h2" textAlign="center">
-        Sign Up
-      </Header>
-      <SignUpForm />
-    </Grid.Column>
-  </Grid>
-)
+import { Button, Form, Grid, Message, Header } from 'semantic-ui-react'
 
 const INITIAL_STATE = {
   username: '',
@@ -28,9 +17,22 @@ const INITIAL_STATE = {
   isAdmin: false,
   error: null
 }
-
+// Default Firebase auth error is unclear
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/account-exists-with-different-credential'
 const ERROR_MSG_ACCOUNT_EXISTS = `An account with an E-Mail address to this social account already exists. Try to login from this account instead and associate your social accounts on your personal account page.`
+
+const SignUpPage = () => (
+  <Grid centered columns={2}>
+    <Grid.Row>
+      <Grid.Column style={{ paddingTop: '2em' }}>
+        <Header as="h1" textAlign="center">
+          Sign Up
+        </Header>
+        <SignUpForm />
+      </Grid.Column>
+    </Grid.Row>
+  </Grid>
+)
 
 class SignUpFormBase extends Component {
   constructor(props) {
@@ -57,26 +59,23 @@ class SignUpFormBase extends Component {
       .then(() => {
         return this.props.firebase.doSendEmailVerification()
       })
-
       //  Reset state & route home
       .then(() => {
         this.setState({ ...INITIAL_STATE })
         this.props.history.push(ROUTES.HOME)
       })
       .catch(error => {
+        this.setState({ error })
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS
         }
+        this.setState({ error })
       })
     e.preventDefault()
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
-  }
-
-  onChangeCheckbox = e => {
-    this.setState({ [e.target.name]: e.target.checked })
   }
 
   render() {
@@ -117,19 +116,10 @@ class SignUpFormBase extends Component {
           type="password"
           placeholder="Confirm Password"
         />
-        {/* <label>
-          Admin:
-          <Form.Input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
-          />
-        </label> */}
-        <Button disabled={isInvalid} type="submit">
+        <Button disabled={isInvalid} type="submit" color="black" fluid>
           Sign Up
         </Button>
-        {error && <p>{error.message}</p>}
+        {error && <Message negative>{error.message}</Message>}
       </Form>
     )
   }
@@ -146,6 +136,5 @@ const SignUpForm = compose(
   withFirebase
 )(SignUpFormBase)
 
-export default SignUpPage
-
 export { SignUpForm, SignUpLink }
+export default SignUpPage

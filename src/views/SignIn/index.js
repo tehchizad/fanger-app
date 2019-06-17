@@ -8,18 +8,19 @@ import { PasswordForgetLink } from '../PasswordForget'
 import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 
-import {
-  Button,
-  Label,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment
-} from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
-const SignInPage = () => (
-  <Grid centered columns={3}>
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  error: null
+}
+// Default Firebase auth error is unclear
+const ERROR_CODE_ACCOUNT_EXISTS = 'auth/account-exists-with-different-credential'
+const ERROR_MSG_ACCOUNT_EXISTS = `An account with an E-Mail address to this social account already exists. Try to login from this account instead and associate your social accounts on your personal account page.`
+
+const SignInPage = INITIAL_STATE => (
+  <Grid centered columns={2}>
     <Grid.Row>
       <Grid.Column style={{ paddingTop: '2em' }}>
         <Header as="h1" textAlign="center">
@@ -31,24 +32,13 @@ const SignInPage = () => (
     <Grid.Row>
       <SignInGoogle />
       <SignInFacebook />
-      <SignInTwitter />
     </Grid.Row>
   </Grid>
 )
 
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-  error: null
-}
-
-const ERROR_CODE_ACCOUNT_EXISTS = 'auth/account-exists-with-different-credential'
-const ERROR_MSG_ACCOUNT_EXISTS = `An account with an E-Mail address to this social account already exists. Try to login from this account instead and associate your social accounts on your personal account page.`
-
 class SignInFormBase extends Component {
   constructor(props) {
     super(props)
-
     this.state = { ...INITIAL_STATE }
   }
 
@@ -64,10 +54,8 @@ class SignInFormBase extends Component {
       .catch(error => {
         this.setState({ error })
       })
-
     event.preventDefault()
   }
-
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value })
   }
@@ -96,7 +84,6 @@ class SignInFormBase extends Component {
           <Button disabled={isInvalid} type="submit" color="black" fluid>
             Sign In
           </Button>
-          <br />
           {error && <Message negative>{error.message}</Message>}
         </Form>
         <Message>
@@ -126,7 +113,7 @@ class SignInGoogleBase extends Component {
           roles: {}
         })
       })
-      .then(socialAuthUser => {
+      .then(() => {
         this.setState({ error: null })
         this.props.history.push(ROUTES.HOME)
       })
@@ -134,6 +121,7 @@ class SignInGoogleBase extends Component {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS
         }
+        this.setState({ error })
       })
     event.preventDefault()
   }
@@ -148,7 +136,7 @@ class SignInGoogleBase extends Component {
           icon="google"
           type="submit"
         />
-        {error && <p>{error.message}</p>}
+        {error && <Message negative>{error.message}</Message>}
       </Form>
     )
   }
@@ -172,7 +160,7 @@ class SignInFacebookBase extends Component {
           roles: {}
         })
       })
-      .then(socialAuthUser => {
+      .then(() => {
         this.setState({ error: null })
         this.props.history.push(ROUTES.HOME)
       })
@@ -180,6 +168,7 @@ class SignInFacebookBase extends Component {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS
         }
+        this.setState({ error })
       })
     event.preventDefault()
   }
@@ -194,7 +183,7 @@ class SignInFacebookBase extends Component {
           icon="facebook f"
           type="submit"
         />
-        {error && <p>{error.message}</p>}
+        {error && <Message negative>{error.message}</Message>}
       </Form>
     )
   }
@@ -218,7 +207,7 @@ class SignInTwitterBase extends Component {
           roles: {}
         })
       })
-      .then(socialAuthUser => {
+      .then(() => {
         this.setState({ error: null })
         this.props.history.push(ROUTES.HOME)
       })
@@ -226,6 +215,7 @@ class SignInTwitterBase extends Component {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS
         }
+        this.setState({ error })
       })
     event.preventDefault()
   }
@@ -240,7 +230,7 @@ class SignInTwitterBase extends Component {
           icon="twitter"
           type="submit"
         />
-        {error && <p>{error.message}</p>}
+        {error && <Message negative>{error.message}</Message>}
       </Form>
     )
   }
@@ -266,6 +256,5 @@ const SignInTwitter = compose(
   withFirebase
 )(SignInTwitterBase)
 
-export default SignInPage
-
 export { SignInForm, SignInGoogle, SignInFacebook, SignInTwitter }
+export default SignInPage

@@ -4,30 +4,34 @@ import { Link } from 'react-router-dom'
 import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 
-import { Button, Form, Container } from 'semantic-ui-react'
-
-const PasswordForgetPage = () => (
-  <Container>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
-  </Container>
-)
+import { Button, Form, Message, Grid, Header } from 'semantic-ui-react'
 
 const INITIAL_STATE = {
   email: '',
   error: null
 }
 
+const PasswordForgetPage = () => (
+  <Grid centered columns={2}>
+    <Grid.Row>
+      <Grid.Column style={{ paddingTop: '2em' }}>
+        <Header as="h1" textAlign="center">
+          PasswordForget
+        </Header>
+        <PasswordForgetForm />
+      </Grid.Column>
+    </Grid.Row>
+  </Grid>
+)
+
 class PasswordForgetFormBase extends Component {
   constructor(props) {
     super(props)
-
     this.state = { ...INITIAL_STATE }
   }
 
   onSubmit = event => {
     const { email } = this.state
-
     this.props.firebase
       .doPasswordReset(email)
       .then(() => {
@@ -36,7 +40,6 @@ class PasswordForgetFormBase extends Component {
       .catch(error => {
         this.setState({ error })
       })
-
     event.preventDefault()
   }
 
@@ -57,10 +60,10 @@ class PasswordForgetFormBase extends Component {
           type="text"
           placeholder="Email Address"
         />
-        <Button disabled={isInvalid} type="submit">
+        <Button disabled={isInvalid} type="submit" color="black" fluid>
           Reset My Password
         </Button>
-        {error && <p>{error.message}</p>}
+        {error && <Message negative>{error.message}</Message>}
       </Form>
     )
   }
@@ -72,8 +75,7 @@ const PasswordForgetLink = () => (
   </p>
 )
 
-export default PasswordForgetPage
-
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase)
 
 export { PasswordForgetForm, PasswordForgetLink }
+export default PasswordForgetPage

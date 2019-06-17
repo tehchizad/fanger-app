@@ -7,7 +7,7 @@ import { AuthUserContext } from '../../utilities/Session'
 import * as ROUTES from '../../utilities/routes'
 import * as ROLES from '../../utilities/roles'
 
-import { Menu } from 'semantic-ui-react'
+import { Menu, Button } from 'semantic-ui-react'
 
 const Navigation = () => (
   <Menu tabular>
@@ -47,7 +47,7 @@ const NavigationNonAuth = () => (
       <Link to={ROUTES.LANDING}>Landing</Link>
     </Menu.Item>
     <Menu.Item>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      <Button content="Sign In" as={Link} to={ROUTES.SIGN_IN} />
     </Menu.Item>
   </Menu.Menu>
 )
