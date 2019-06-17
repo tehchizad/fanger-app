@@ -23,7 +23,6 @@ const NavigationAuth = ({ authUser }) => (
       <Link to={ROUTES.LANDING}>Landing</Link>
     </Menu.Item>
     <Menu.Item>
-      {console.log(authUser)}
       <Link to={ROUTES.ACCOUNT}>Account</Link>
     </Menu.Item>
   </Menu.Menu>

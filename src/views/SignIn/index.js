@@ -24,8 +24,8 @@ const SignInPage = () => (
     <Grid.Row style={{ maxWidth: 450 }}>
       <Grid.Column style={{ paddingTop: '2em' }}>
         <Header as="h1" textAlign="center">
-          <i className="barcode icon" />
-          App
+          <i className="picture icon" />
+          Application
         </Header>
         <SignInForm />
         <SignUpLink />
