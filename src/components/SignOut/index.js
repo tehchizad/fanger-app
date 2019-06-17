@@ -9,7 +9,7 @@ const SignOutButton = ({ firebase }) => (
     onClick={firebase.doSignOut}
     color="red"
     size="tiny"
-    icon="log out icon"
+    icon="log out"
     content="Logout"
   />
 )
