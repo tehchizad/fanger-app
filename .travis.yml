@@ -6,4 +6,4 @@ deploy:
   keyfile: 'gae-key.json.enc'
   project: 'fanger-app'
 before_install:
-  - openssl aes-256-cbc -K $encrypted_0a6446eb3ae3_key  -iv $encrypted_0a6446eb3ae3_key -in gae-key.json.enc -out gae-key.json -d
+  - 'openssl aes-256-cbc -K $encrypted_0a6446eb3ae3_key  -iv $encrypted_0a6446eb3ae3_key -in gae-key.json.enc -out gae-key.json -d'
