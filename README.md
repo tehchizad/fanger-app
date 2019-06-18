@@ -11,3 +11,7 @@ Firebase is used for both email and social OAuth2 user authentication. API keys 
 ## Travis CI integration
 
 Travis CI integration has been established.
+
+# Changelog
+
+Initialized pull reuqests (hopefully)
