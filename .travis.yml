@@ -15,13 +15,13 @@ script:
   - npm test
   - npm run build
 deploy:
-    provider: gae
-    # Skip cleanup so api_key.py and vendored dependencies are still there
-    skip_cleanup: true
-    keyfile: travis-creds.json
-    project: fanger-app
-    default: true
-    local_dir: build
+  provider: gae
+  # Skip cleanup so api_key.py and vendored dependencies are still there
+  skip_cleanup: true
+  keyfile: travis-creds.json
+  project: fanger-app
+  default: true
+  local_dir: build
   on:
     branch: master
 # [END travis_deploy]
