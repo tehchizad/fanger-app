@@ -5,7 +5,3 @@ handlers:
   - url: ".*"
     script: auto
     secure: always
-automatic_scaling:
-  target_cpu_utilization: 0.7
-  min_instances: 0
-  max_instances: 3
