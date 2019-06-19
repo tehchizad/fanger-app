@@ -1,5 +1,5 @@
 # [START runtime]
-runtime: nodejs
+runtime: nodejs10
 env: standard
 instance_class: F1
 # [END runtime]
