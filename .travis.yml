@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - '10'
-# Cache our Gcloud SDK between commands
 cache:
   directories:
     - "node_modules"
@@ -24,4 +23,3 @@ deploy:
   local_dir: build
   on:
     branch: master
-# [END travis_deploy]
