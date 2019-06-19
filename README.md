@@ -10,7 +10,10 @@ Firebase is used for both email and social OAuth2 user authentication. API keys 
 
 ## Travis CI integration
 
-Travis CI integration has been established.
+Travis CI is implemented for CI/CD [2].
+
+[2] https://travis-ci.org/codettastone/fanger-app
+
 ### Deployment
 Install travis CLI (documentation is incorrect as of 6/2019)
 gem install travis -v 1.8.9 --no-document
