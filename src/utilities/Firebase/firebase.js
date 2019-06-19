@@ -27,12 +27,18 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password)
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password)
-  doSignInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider)
-  doSignInWithFacebook = () => this.auth.signInWithPopup(this.facebookProvider)
-  doSignInWithTwitter = () => this.auth.signInWithPopup(this.twitterProvider)
-  doSignOut = () => this.auth.signOut()
-  doPasswordReset = email => this.auth.sendPasswordResetEmail(email)
-  doPasswordUpdate = password => this.auth.currentUser.updatePassword(password)
+  doSignInWithGoogle = () =>
+    this.auth.signInWithPopup(this.googleProvider)
+  doSignInWithFacebook = () =>
+    this.auth.signInWithPopup(this.facebookProvider)
+  doSignInWithTwitter = () =>
+    this.auth.signInWithPopup(this.twitterProvider)
+  doSignOut = () =>
+    this.auth.signOut()
+  doPasswordReset = email =>
+    this.auth.sendPasswordResetEmail(email)
+  doPasswordUpdate = password =>
+    this.auth.currentUser.updatePassword(password)
   doSendEmailVerification = () =>
     this.auth.currentUser.sendEmailVerification({
       url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT
