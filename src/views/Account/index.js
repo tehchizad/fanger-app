@@ -37,7 +37,7 @@ const SIGN_IN_METHODS = [
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <Grid centered>
+      <Grid textAlign="center" verticalAlign="middle">
         <Grid.Row style={{ maxWidth: 450 }}>
           <Grid.Column style={{ paddingTop: '2em' }}>
             <Header as="h1" textAlign="center">
@@ -47,7 +47,7 @@ const AccountPage = () => (
             <PasswordChangeForm />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row style={{ maxWidth: 450 }}>
+        <Grid.Row style={{ padding: 0 }}>
           <SignOutButton />
           <LoginManagement authUser={authUser} />
         </Grid.Row>
@@ -141,21 +141,21 @@ const SocialLoginToggle = ({
   isEnabled ? (
     <Button
       onClick={() => onUnlink(signInMethod.id)}
-      size="tiny"
       disabled={onlyOneLeft}
+      size="tiny"
       color={signInMethod.color}
       icon={signInMethod.icon}
       content="Unlink"
     />
   ) : (
-    <Button
-      onClick={() => onLink(signInMethod.provider)}
-      size="tiny"
-      color={signInMethod.color}
-      icon={signInMethod.icon}
-      content="Link"
-    />
-  )
+      <Button
+        onClick={() => onLink(signInMethod.provider)}
+        size="tiny"
+        color={signInMethod.color}
+        icon={signInMethod.icon}
+        content="Link"
+      />
+    )
 
 const LoginManagement = withFirebase(LoginManagementBase)
 const condition = authUser => !!authUser
