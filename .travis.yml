@@ -26,4 +26,4 @@ install:
 - gcloud config set project fanger-app
 script:
 # Deploy the app
-- gcloud -q app deploy app.yaml --promote
+- gcloud app deploy
