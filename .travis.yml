@@ -23,7 +23,7 @@ before_install:
 # [END auth]
 install:
 # Set the correct project to deploy to
-- gcloud config set project continuous-deployment-python
+- gcloud config set project fanger-app
 script:
 # Deploy the app
 - gcloud -q app deploy app.yaml --promote
