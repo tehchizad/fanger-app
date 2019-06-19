@@ -1,7 +1,14 @@
-runtime: nodejs10
+# [START runtime]
+runtime: nodejs
 env: standard
 instance_class: F1
+# [END runtime]
+
+# [START handlers]
 handlers:
-  - url: ".*"
-    script: index.js
-    secure: always
+  - url: /
+    static_files: build/index.html
+    upload: build/index.html
+  - url: /
+    static_dir: build
+  # [END handlers]
