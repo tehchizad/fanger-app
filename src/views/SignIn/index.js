@@ -18,6 +18,8 @@ const INITIAL_STATE = {
 // Default Firebase auth error is unclear
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/account-exists-with-different-credential'
 const ERROR_MSG_ACCOUNT_EXISTS = `An account with an E-Mail address to this social account already exists. Try to login from this account instead and associate your social accounts on your personal account page.`
+const ERROR_CODE_NO_ACCOUNT = `auth/user-not-found`
+const ERROR_MSG_NO_ACCOUNT = `Username or Password is incorrect`
 
 const SignInPage = () => (
   <Grid textAlign="center" style={{ paddingTop: '10vh' }} verticalAlign="middle">
@@ -54,6 +56,9 @@ class SignInFormBase extends Component {
         this.props.history.push(ROUTES.LANDING)
       })
       .catch(error => {
+        if (error.code === ERROR_CODE_NO_ACCOUNT) {
+          error.message = ERROR_MSG_NO_ACCOUNT
+        }
         this.setState({ error })
       })
     event.preventDefault()
