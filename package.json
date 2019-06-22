@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.0.1",
     "@material-ui/icons": "^4.0.1",
+    "@sendgrid/mail": "^6.4.0",
     "browserslist": "^4.6.3",
     "firebase": "^6.1.0",
     "react": "^16.8.6",

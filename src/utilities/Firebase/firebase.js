@@ -4,10 +4,10 @@ import 'firebase/database'
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  authDomain: 'codettastone.firebaseapp.com',
+  databaseURL: 'https://codettastone.firebaseio.com',
+  projectId: 'codettastone',
+  storageBucket: 'codettastone.appspot.com',
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 }
 
@@ -27,18 +27,12 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password)
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password)
-  doSignInWithGoogle = () =>
-    this.auth.signInWithPopup(this.googleProvider)
-  doSignInWithFacebook = () =>
-    this.auth.signInWithPopup(this.facebookProvider)
-  doSignInWithTwitter = () =>
-    this.auth.signInWithPopup(this.twitterProvider)
-  doSignOut = () =>
-    this.auth.signOut()
-  doPasswordReset = email =>
-    this.auth.sendPasswordResetEmail(email)
-  doPasswordUpdate = password =>
-    this.auth.currentUser.updatePassword(password)
+  doSignInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider)
+  doSignInWithFacebook = () => this.auth.signInWithPopup(this.facebookProvider)
+  doSignInWithTwitter = () => this.auth.signInWithPopup(this.twitterProvider)
+  doSignOut = () => this.auth.signOut()
+  doPasswordReset = email => this.auth.sendPasswordResetEmail(email)
+  doPasswordUpdate = password => this.auth.currentUser.updatePassword(password)
   doSendEmailVerification = () =>
     this.auth.currentUser.sendEmailVerification({
       url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT

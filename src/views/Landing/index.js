@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import sgMail from '@sendgrid/mail'
 
 import { AuthUserContext } from '../../utilities/Session'
 
@@ -25,9 +26,17 @@ class Landing extends Component {
   }
 
   onSubmit = event => {
-    const { email, payload } = this.state
-    console.log(email, payload)
     event.preventDefault()
+    const { email, payload } = this.state
+    const msg = {
+      to: email,
+      from: 'test@example.com',
+      subject: 'Sending with SendGrid is Fun',
+      text: payload,
+      html: '<strong>and easy to do anywhere, even with Node.js</strong>'
+    }
+    sgMail.setApiKey(process.env.REACT_APP_SENDGRID_API_KEY)
+    sgMail.send(msg)
   }
 
   onChange = event => {
