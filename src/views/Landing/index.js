@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import sgMail from '@sendgrid/mail'
 
 import { AuthUserContext } from '../../utilities/Session'
 
@@ -28,15 +27,20 @@ class Landing extends Component {
   onSubmit = event => {
     event.preventDefault()
     const { email, payload } = this.state
-    const msg = {
-      to: email,
-      from: 'test@example.com',
-      subject: 'Sending with SendGrid is Fun',
-      text: payload,
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>'
-    }
-    sgMail.setApiKey(process.env.REACT_APP_SENDGRID_API_KEY)
-    sgMail.send(msg)
+    let url = `https://us-central1-fanger-app.cloudfunctions.net/email-backend`
+    let postFunction = fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: `${email}, ${payload}`
+    })
+    postFunction.then(response => {
+      this.setState({ email: '', payload: '' })
+      console.log(response)
+    })
+  }
+
+  resetForm = () => {
+    document.getElementById('challengeForm').reset() // doesn't work
   }
 
   onChange = event => {
@@ -58,7 +62,7 @@ class Landing extends Component {
               {authUser =>
                 authUser ? (
                   <Segment stacked>
-                    <Form onSubmit={this.onSubmit}>
+                    <Form onSubmit={this.onSubmit} id="challengeForm">
                       <Form.Input
                         fluid
                         icon="user"
@@ -80,6 +84,7 @@ class Landing extends Component {
                         type="submit"
                         color="black"
                         content="Send"
+                        onClick={this.resetForm}
                       />
                       {error && <Message negative>{error.message}</Message>}
                     </Form>
