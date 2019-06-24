@@ -27,7 +27,7 @@ class Landing extends Component {
   onSubmit = event => {
     event.preventDefault()
     const { email, payload } = this.state
-    let url = `https://us-central1-fanger-app.cloudfunctions.net/email-backend`
+    let url = `https://us-central1-fanger-app.cloudfunctions.net/emailBackend`
     let postFunction = fetch(url, {
       method: 'POST',
       mode: 'no-cors',
