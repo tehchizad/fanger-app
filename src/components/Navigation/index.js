@@ -1,11 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Menu, Button } from 'semantic-ui-react'
 
 import { AuthUserContext } from '../../utilities/Session'
-
 import * as ROUTES from '../../utilities/routes'
-
-import { Menu, Button } from 'semantic-ui-react'
 
 const Navigation = () => (
   <Menu tabular>

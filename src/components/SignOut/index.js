@@ -1,8 +1,7 @@
 import React from 'react'
+import { Button, Form } from 'semantic-ui-react'
 
 import { withFirebase } from '../../utilities/Firebase'
-
-import { Button, Form } from 'semantic-ui-react'
 
 const SignOutButton = ({ firebase }) => (
   <Form>

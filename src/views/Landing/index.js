@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-
-import { AuthUserContext } from '../../utilities/Session'
-
 import { Grid, Header, Form, Message, Segment, Button } from 'semantic-ui-react'
+import { AuthUserContext } from '../../utilities/Session'
+import Layouts from './Layouts'
 
 const INITIAL_STATE = {
   email: '',
@@ -40,7 +39,7 @@ class Landing extends Component {
   }
 
   resetForm = () => {
-    document.getElementById('challengeForm').reset() // doesn't work
+    document.getElementById('challengeForm').reset()
   }
 
   onChange = event => {
@@ -53,7 +52,7 @@ class Landing extends Component {
 
     return (
       <Grid textAlign="center" verticalAlign="middle">
-        <Grid.Row style={{ maxWidth: 450 }}>
+        <Grid.Row style={{ maxWidth: 550 }}>
           <Grid.Column style={{ paddingTop: '2em' }}>
             <Header as="h2" textAlign="center">
               You wanna play a game?
@@ -61,7 +60,7 @@ class Landing extends Component {
             <AuthUserContext.Consumer>
               {authUser =>
                 authUser ? (
-                  <Segment stacked>
+                  <Segment stacked color='red' >
                     <Form onSubmit={this.onSubmit} id="challengeForm">
                       <Form.Input
                         fluid
@@ -88,10 +87,11 @@ class Landing extends Component {
                       />
                       {error && <Message negative>{error.message}</Message>}
                     </Form>
+                    <Layouts />
                   </Segment>
                 ) : (
-                  <Intro />
-                )
+                    <Intro />
+                  )
               }
             </AuthUserContext.Consumer>
           </Grid.Column>
