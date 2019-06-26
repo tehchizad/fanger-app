@@ -37,7 +37,7 @@ function PasswordChangeForm({ firebase }) {
       <Form.Input
         name="passwordOne"
         value={passwordOne}
-        onChange={(e) => setPasswordOne(e.target.value)}
+        onChange={e => setPasswordOne(e.target.value)}
         type="password"
         placeholder="New Password"
       />
@@ -47,18 +47,17 @@ function PasswordChangeForm({ firebase }) {
       <Form.Input
         name="passwordTwo"
         value={passwordTwo}
-        onChange={(e) => setPasswordTwo(e.target.value)}
+        onChange={e => setPasswordTwo(e.target.value)}
         type="password"
         placeholder="Confirm New Password"
       />
       <Button disabled={isInvalid} type="submit" color="black" fluid>
         Reset My Password
-        </Button>
-      {error && (<Message negative>{error.message}</Message>)}
-      {reset && (<Message positive >Success!</Message>)}
+      </Button>
+      {error && <Message negative>{error.message}</Message>}
+      {reset && <Message positive>Success!</Message>}
     </Form>
   )
 }
 
 export default withFirebase(PasswordChangeForm)
-

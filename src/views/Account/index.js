@@ -16,7 +16,7 @@ const AuthedAccountPage = ({ authUser, history }) => {
         <Grid.Column style={{ paddingTop: '2em' }}>
           <Header as="h1" textAlign="center">
             Account Management
-            </Header>
+          </Header>
           <Header textAlign="center">{authUser.email}</Header>
           <PasswordChangeForm />
         </Grid.Column>
@@ -31,12 +31,13 @@ const AuthedAccountPage = ({ authUser, history }) => {
 
 const AccountPage = ({ history }) => (
   <AuthUserContext.Consumer>
-    {authUser => (
-      authUser ? <AuthedAccountPage authUser={authUser} /> : history.push(ROUTES.LANDING)
-    )}
+    {authUser => (authUser ? <AuthedAccountPage authUser={authUser} /> : history.push(ROUTES.LANDING))}
   </AuthUserContext.Consumer>
 )
 
 const LoginManagement = withFirebase(LoginManagementBase)
 
-export default compose(withEmailVerification, withFirebase)(AccountPage)
+export default compose(
+  withEmailVerification,
+  withFirebase
+)(AccountPage)

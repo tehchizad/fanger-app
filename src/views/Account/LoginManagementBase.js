@@ -22,13 +22,7 @@ const SIGN_IN_METHODS = [
   }
 ]
 
-const SocialLoginToggle = ({
-  onlyOneLeft,
-  isEnabled,
-  signInMethod,
-  onLink,
-  onUnlink
-}) =>
+const SocialLoginToggle = ({ onlyOneLeft, isEnabled, signInMethod, onLink, onUnlink }) =>
   isEnabled ? (
     <Button
       onClick={() => onUnlink(signInMethod.id)}
@@ -39,14 +33,14 @@ const SocialLoginToggle = ({
       content="Unlink"
     />
   ) : (
-      <Button
-        onClick={() => onLink(signInMethod.provider)}
-        size="tiny"
-        color={signInMethod.color}
-        icon={signInMethod.icon}
-        content="Link"
-      />
-    )
+    <Button
+      onClick={() => onLink(signInMethod.provider)}
+      size="tiny"
+      color={signInMethod.color}
+      icon={signInMethod.icon}
+      content="Link"
+    />
+  )
 
 class LoginManagementBase extends Component {
   constructor(props) {
@@ -65,9 +59,7 @@ class LoginManagementBase extends Component {
   fetchSignInMethods = () => {
     this.props.firebase.auth
       .fetchSignInMethodsForEmail(this.props.authUser.email)
-      .then(activeSignInMethods =>
-        this.setState({ activeSignInMethods, error: null })
-      )
+      .then(activeSignInMethods => this.setState({ activeSignInMethods, error: null }))
       .catch(error => this.setState({ error }))
   }
 
@@ -79,10 +71,7 @@ class LoginManagementBase extends Component {
   }
 
   onDefaultLoginLink = password => {
-    const credential = this.props.firebase.emailAuthProvider.credential(
-      this.props.authUser.email,
-      password
-    )
+    const credential = this.props.firebase.emailAuthProvider.credential(this.props.authUser.email, password)
 
     this.props.firebase.auth.currentUser
       .linkAndRetrieveDataWithCredential(credential)

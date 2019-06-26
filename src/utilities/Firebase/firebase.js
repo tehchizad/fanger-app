@@ -23,10 +23,8 @@ class Firebase {
   }
 
   // Authentication methods for the various login routes
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password)
-  doSignInWithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email, password)
+  doCreateUserWithEmailAndPassword = (email, password) => this.auth.createUserWithEmailAndPassword(email, password)
+  doSignInWithEmailAndPassword = (email, password) => this.auth.signInWithEmailAndPassword(email, password)
   doSignInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider)
   doSignInWithFacebook = () => this.auth.signInWithPopup(this.facebookProvider)
   doSignInWithTwitter = () => this.auth.signInWithPopup(this.twitterProvider)

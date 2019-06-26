@@ -11,9 +11,8 @@ const INITIAL_STATE = {
 
 const Intro = () => (
   <p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam quo earum
-    ullam, facilis aliquid dolorum cum eos sed consequatur a reiciendis sit
-    accusantium explicabo impedit.
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam quo earum ullam, facilis aliquid dolorum cum eos
+    sed consequatur a reiciendis sit accusantium explicabo impedit.
   </p>
 )
 
@@ -60,7 +59,7 @@ class Landing extends Component {
             <AuthUserContext.Consumer>
               {authUser =>
                 authUser ? (
-                  <Segment stacked color='red' >
+                  <Segment stacked color="red">
                     <Form onSubmit={this.onSubmit} id="challengeForm">
                       <Form.Input
                         fluid
@@ -72,11 +71,7 @@ class Landing extends Component {
                         type="text"
                         placeholder="Email"
                       />
-                      <Form.TextArea
-                        name="payload"
-                        onChange={this.onChange}
-                        type="text"
-                      />
+                      <Form.TextArea name="payload" onChange={this.onChange} type="text" />
                       <Button
                         fluid
                         disabled={isInvalid}
@@ -90,8 +85,8 @@ class Landing extends Component {
                     <Layouts />
                   </Segment>
                 ) : (
-                    <Intro />
-                  )
+                  <Intro />
+                )
               }
             </AuthUserContext.Consumer>
           </Grid.Column>

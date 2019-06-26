@@ -8,9 +8,7 @@ import * as ROUTES from '../../utilities/routes'
 const Navigation = () => (
   <Menu tabular>
     <AuthUserContext.Consumer>
-      {authUser =>
-        authUser ? <NavigationAuth authUser={authUser} /> : <NavigationNonAuth />
-      }
+      {authUser => (authUser ? <NavigationAuth authUser={authUser} /> : <NavigationNonAuth />)}
     </AuthUserContext.Consumer>
   </Menu>
 )

@@ -52,9 +52,7 @@ class SignUpFormBase extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       // Create the user in the Firebase realtime database
       .then(authUser => {
-        return this.props.firebase
-          .user(authUser.user.uid)
-          .set({ username, email, roles })
+        return this.props.firebase.user(authUser.user.uid).set({ username, email, roles })
       })
       .then(() => {
         return this.props.firebase.doSendEmailVerification()
@@ -80,29 +78,13 @@ class SignUpFormBase extends Component {
 
   render() {
     const { username, email, passwordOne, passwordTwo, error } = this.state
-    const isInvalid =
-      passwordOne !== passwordTwo ||
-      passwordOne === '' ||
-      email === '' ||
-      username === ''
+    const isInvalid = passwordOne !== passwordTwo || passwordOne === '' || email === '' || username === ''
 
     return (
       <Segment stacked>
         <Form onSubmit={this.onSubmit}>
-          <Form.Input
-            name="username"
-            value={username}
-            onChange={this.onChange}
-            type="text"
-            placeholder="Full Name"
-          />
-          <Form.Input
-            name="email"
-            value={email}
-            onChange={this.onChange}
-            type="text"
-            placeholder="Email Address"
-          />
+          <Form.Input name="username" value={username} onChange={this.onChange} type="text" placeholder="Full Name" />
+          <Form.Input name="email" value={email} onChange={this.onChange} type="text" placeholder="Email Address" />
           <Form.Input
             name="passwordOne"
             value={passwordOne}

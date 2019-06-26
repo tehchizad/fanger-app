@@ -57,13 +57,7 @@ class SignInGoogleBase extends Component {
     const { error } = this.state
     return (
       <Form onSubmit={this.onSubmit}>
-        <Button
-          size="tiny"
-          color="google plus"
-          content="Sign In"
-          icon="google"
-          type="submit"
-        />
+        <Button size="tiny" color="google plus" content="Sign In" icon="google" type="submit" />
         {error && <Message negative>{error.message}</Message>}
       </Form>
     )
@@ -99,13 +93,7 @@ class SignInFacebookBase extends Component {
     const { error } = this.state
     return (
       <Form onSubmit={this.onSubmit}>
-        <Button
-          size="tiny"
-          color="facebook"
-          content="Sign In"
-          icon="facebook f"
-          type="submit"
-        />
+        <Button size="tiny" color="facebook" content="Sign In" icon="facebook f" type="submit" />
         {error && <Message negative>{error.message}</Message>}
       </Form>
     )

@@ -39,7 +39,7 @@ function SignInFormBase({ firebase, history }) {
           iconPosition="left"
           name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           type="text"
           placeholder="Email"
         />
@@ -49,12 +49,19 @@ function SignInFormBase({ firebase, history }) {
           iconPosition="left"
           name="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
           type="password"
           placeholder="Password"
         />
-        <Button fluid disabled={isInvalid} type="submit" color="black">Sign In</Button>
-        {error && (<Message negative>{error.message}<PasswordForgetLink /></Message>)}
+        <Button fluid disabled={isInvalid} type="submit" color="black">
+          Sign In
+        </Button>
+        {error && (
+          <Message negative>
+            {error.message}
+            <PasswordForgetLink />
+          </Message>
+        )}
       </Form>
     </Segment>
   )
