@@ -17,7 +17,7 @@ const AuthedAccountPage = ({ authUser }) => {
       <h2>{authUser.email}</h2>
       <PasswordChangeForm />
       <SignOutButton />
-      <LoginManagement authUser={authUser} />
+      {/* <LoginManagement authUser={authUser} /> */}
     </React.Fragment>
   )
 }
