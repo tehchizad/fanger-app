@@ -1,45 +1,18 @@
 import React, { Component } from 'react'
-import { Button, Form, Message } from 'semantic-ui-react'
 
 const SIGN_IN_METHODS = [
-  {
-    id: 'password',
-    provider: null,
-    icon: 'mail',
-    color: 'green'
-  },
-  {
-    id: 'google.com',
-    provider: 'googleProvider',
-    icon: 'google',
-    color: 'google plus'
-  },
-  {
-    id: 'facebook.com',
-    provider: 'facebookProvider',
-    icon: 'facebook f',
-    color: 'facebook'
-  }
+  { id: 'password', provider: null },
+  { id: 'google.com', provider: 'googleProvider' },
+  { id: 'facebook.com', provider: 'facebookProvider' }
 ]
 
 const SocialLoginToggle = ({ onlyOneLeft, isEnabled, signInMethod, onLink, onUnlink }) =>
   isEnabled ? (
-    <Button
-      onClick={() => onUnlink(signInMethod.id)}
-      disabled={onlyOneLeft}
-      size="tiny"
-      color={signInMethod.color}
-      icon={signInMethod.icon}
-      content="Unlink"
-    />
+    <button onClick={() => onUnlink(signInMethod.id)} disabled={onlyOneLeft}>
+      link
+    </button>
   ) : (
-    <Button
-      onClick={() => onLink(signInMethod.provider)}
-      size="tiny"
-      color={signInMethod.color}
-      icon={signInMethod.icon}
-      content="Link"
-    />
+    <button onClick={() => onLink(signInMethod.provider)}>unlink</button>
   )
 
 class LoginManagementBase extends Component {
@@ -87,13 +60,11 @@ class LoginManagementBase extends Component {
   }
 
   render() {
-    const { activeSignInMethods, error } = this.state
-
     return (
-      <Form>
+      <form>
         {SIGN_IN_METHODS.map(signInMethod => {
-          const onlyOneLeft = activeSignInMethods.length === 1
-          const isEnabled = activeSignInMethods.includes(signInMethod.id)
+          const onlyOneLeft = this.state.activeSignInMethods.length === 1
+          const isEnabled = this.state.activeSignInMethods.includes(signInMethod.id)
 
           return (
             <SocialLoginToggle
@@ -106,8 +77,8 @@ class LoginManagementBase extends Component {
             />
           )
         })}
-        {error && <Message negative>{error.message}</Message>}
-      </Form>
+        {this.state.error && <p>{this.state.error.message}</p>}
+      </form>
     )
   }
 }

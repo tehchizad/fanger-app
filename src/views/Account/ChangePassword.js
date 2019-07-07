@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { Button, Dimmer, Loader, Form, Message } from 'semantic-ui-react'
-
 import { withFirebase } from '../../utilities/Firebase'
 
 function PasswordChangeForm({ firebase }) {
@@ -8,16 +6,13 @@ function PasswordChangeForm({ firebase }) {
   const [passwordTwo, setPasswordTwo] = useState('')
   const [error, setError] = useState(null)
   const [reset, setReset] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   const isInvalid = passwordOne !== passwordTwo || passwordOne === ''
 
   const onSubmit = event => {
-    setLoading(true)
     firebase
       .doPasswordUpdate(passwordOne)
       .then(() => {
-        setLoading(false)
         setPasswordOne('')
         setPasswordTwo('')
         setReset(true)
@@ -33,30 +28,27 @@ function PasswordChangeForm({ firebase }) {
   }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <Form.Input
+    <form onSubmit={onSubmit}>
+      <input
         name="passwordOne"
         value={passwordOne}
         onChange={e => setPasswordOne(e.target.value)}
         type="password"
         placeholder="New Password"
       />
-      <Dimmer inverted active={loading}>
-        <Loader />
-      </Dimmer>
-      <Form.Input
+      <input
         name="passwordTwo"
         value={passwordTwo}
         onChange={e => setPasswordTwo(e.target.value)}
         type="password"
         placeholder="Confirm New Password"
       />
-      <Button disabled={isInvalid} type="submit" color="black" fluid>
+      <button disabled={isInvalid} type="submit" color="black" fluid>
         Reset My Password
-      </Button>
-      {error && <Message negative>{error.message}</Message>}
-      {reset && <Message positive>Success!</Message>}
-    </Form>
+      </button>
+      {error && <p>{error.message}</p>}
+      {reset && <p>Success!</p>}
+    </form>
   )
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { compose } from 'recompose'
-import { Grid, Header } from 'semantic-ui-react'
 
 import { AuthUserContext, withEmailVerification } from '../../utilities/Session'
 import { withFirebase } from '../../utilities/Firebase'
@@ -9,26 +8,20 @@ import PasswordChangeForm from './ChangePassword'
 import SignOutButton from '../../components/SignOut'
 import LoginManagementBase from './LoginManagementBase'
 
-const AuthedAccountPage = ({ authUser, history }) => {
+const AuthedAccountPage = ({ authUser }) => {
   return (
-    <Grid textAlign="center" verticalAlign="middle">
-      <Grid.Row style={{ maxWidth: 450 }}>
-        <Grid.Column style={{ paddingTop: '2em' }}>
-          <Header as="h1" textAlign="center">
-            Account Management
-          </Header>
-          <Header textAlign="center">{authUser.email}</Header>
-          <PasswordChangeForm />
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row style={{ padding: 0 }}>
-        <SignOutButton />
-        <LoginManagement authUser={authUser} />
-      </Grid.Row>
-    </Grid>
+    <React.Fragment>
+      <h1>Account Management</h1>
+      <h2>{authUser.email}</h2>
+      <PasswordChangeForm />
+      <SignOutButton />
+      <LoginManagement authUser={authUser} />
+    </React.Fragment>
   )
 }
 
+// Verify the user exists before rendering Account page
+// If no account is found, redirect user to the Landing page
 const AccountPage = ({ history }) => (
   <AuthUserContext.Consumer>
     {authUser => (authUser ? <AuthedAccountPage authUser={authUser} /> : history.push(ROUTES.LANDING))}
