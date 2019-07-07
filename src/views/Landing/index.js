@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Header, Form, Message, Segment, Button } from 'semantic-ui-react'
 import { AuthUserContext } from '../../utilities/Session'
-import Layouts from './Layouts'
 
 const INITIAL_STATE = {
   email: '',
@@ -82,7 +81,6 @@ class Landing extends Component {
                       />
                       {error && <Message negative>{error.message}</Message>}
                     </Form>
-                    <Layouts />
                   </Segment>
                 ) : (
                   <Intro />
