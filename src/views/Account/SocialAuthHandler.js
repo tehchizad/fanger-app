@@ -9,10 +9,10 @@ const SIGN_IN_METHODS = [
 const SocialLoginToggle = ({ onlyOneLeft, isEnabled, signInMethod, onLink, onUnlink }) =>
   isEnabled ? (
     <button onClick={() => onUnlink(signInMethod.id)} disabled={onlyOneLeft}>
-      link
+      unlink {signInMethod.id}
     </button>
   ) : (
-    <button onClick={() => onLink(signInMethod.provider)}>unlink</button>
+    <button onClick={() => onLink(signInMethod.provider)}>link {signInMethod.id}</button>
   )
 
 class LoginManagementBase extends Component {

@@ -43,7 +43,7 @@ function PasswordChangeForm({ firebase }) {
         type="password"
         placeholder="Confirm New Password"
       />
-      <button disabled={isInvalid} type="submit" color="black" fluid>
+      <button disabled={isInvalid} type="submit">
         Reset My Password
       </button>
       {error && <p>{error.message}</p>}

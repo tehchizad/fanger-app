@@ -1,12 +1,14 @@
 import React from 'react'
 import { compose } from 'recompose'
-
 import { AuthUserContext, withEmailVerification } from '../../utilities/Session'
 import { withFirebase } from '../../utilities/Firebase'
 import * as ROUTES from '../../utilities/routes'
 import PasswordChangeForm from './ChangePassword'
-import SignOutButton from '../../components/SignOut'
-import LoginManagementBase from './LoginManagementBase'
+import SocialAuthHandler from './SocialAuthHandler'
+
+const LoginManagement = withFirebase(SocialAuthHandler)
+const SignOutButtonBase = ({ firebase }) => <button onClick={firebase.doSignOut}>Logout</button>
+const SignOutButton = withFirebase(SignOutButtonBase)
 
 const AuthedAccountPage = ({ authUser }) => {
   return (
@@ -27,8 +29,6 @@ const AccountPage = ({ history }) => (
     {authUser => (authUser ? <AuthedAccountPage authUser={authUser} /> : history.push(ROUTES.LANDING))}
   </AuthUserContext.Consumer>
 )
-
-const LoginManagement = withFirebase(LoginManagementBase)
 
 export default compose(
   withEmailVerification,
