@@ -1,45 +1,43 @@
 import React, { Component } from 'react'
-import { Button, Form, Message } from 'semantic-ui-react'
+import { Fab } from '@material-ui/core'
+import { Link, LinkOff } from '@material-ui/icons'
 
 const SIGN_IN_METHODS = [
   {
     id: 'password',
     provider: null,
-    icon: 'mail',
+    name: 'email',
     color: 'green'
   },
   {
     id: 'google.com',
     provider: 'googleProvider',
-    icon: 'google',
-    color: 'google plus'
+    name: 'google',
+    color: 'orange'
   },
   {
     id: 'facebook.com',
     provider: 'facebookProvider',
-    icon: 'facebook f',
-    color: 'facebook'
+    name: 'facebook',
+    color: 'blue'
   }
 ]
 
 const SocialLoginToggle = ({ onlyOneLeft, isEnabled, signInMethod, onLink, onUnlink }) =>
   isEnabled ? (
-    <Button
+    <Fab
+      color="default"
+      variant="extended"
+      size="small"
       onClick={() => onUnlink(signInMethod.id)}
       disabled={onlyOneLeft}
-      size="tiny"
-      color={signInMethod.color}
-      icon={signInMethod.icon}
-      content="Unlink"
-    />
+      content="Unlink">
+      <LinkOff /> {signInMethod.name}
+    </Fab>
   ) : (
-    <Button
-      onClick={() => onLink(signInMethod.provider)}
-      size="tiny"
-      color={signInMethod.color}
-      icon={signInMethod.icon}
-      content="Link"
-    />
+    <Fab variant="extended" size="small" onClick={() => onLink(signInMethod.provider)} content="Link">
+      <Link /> {signInMethod.name}
+    </Fab>
   )
 
 class SocialAuthHandler extends Component {
@@ -90,7 +88,7 @@ class SocialAuthHandler extends Component {
     const { activeSignInMethods, error } = this.state
 
     return (
-      <Form>
+      <React.Fragment>
         {SIGN_IN_METHODS.map(signInMethod => {
           const onlyOneLeft = activeSignInMethods.length === 1
           const isEnabled = activeSignInMethods.includes(signInMethod.id)
@@ -106,8 +104,8 @@ class SocialAuthHandler extends Component {
             />
           )
         })}
-        {error && <Message negative>{error.message}</Message>}
-      </Form>
+        {error && <p>{error.message}</p>}
+      </React.Fragment>
     )
   }
 }
