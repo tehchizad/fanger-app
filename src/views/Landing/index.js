@@ -1,19 +1,107 @@
 import React, { Component } from 'react'
-import { Grid, Header, Form, Message, Segment, Button } from 'semantic-ui-react'
+import { Grid, Input, Search, Label, Header, Message, Container, Segment, Button, Form } from 'semantic-ui-react'
 import { AuthUserContext } from '../../utilities/Session'
+import * as ROUTES from '../../utilities/routes'
+
+const testFeed = [
+  {
+    id: 473874893,
+    title: 'First challenge',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, maiores!',
+    likes: 3,
+    creator: 'name name',
+    challenger: 'name name'
+  },
+  {
+    id: 34384093,
+    title: 'Second challenge',
+    description:
+      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora facere cum explicabo, amet nisi veniam.',
+    likes: 2,
+    creator: 'name name',
+    challenger: 'name name'
+  },
+  {
+    id: 283908802,
+    title: 'Second challenge',
+    description:
+      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora facere cum explicabo, amet nisi veniam.',
+    likes: 9,
+    creator: 'name name',
+    challenger: 'name name'
+  },
+  {
+    id: 847937292,
+    title: 'Second challenge',
+    description:
+      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora facere cum explicabo, amet nisi veniam.',
+    likes: 11,
+    creator: 'name name',
+    challenger: 'name name'
+  },
+  {
+    id: 101903019,
+    title: 'Third challenge',
+    description:
+      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora facere cum explicabo, amet nisi veniam.',
+    likes: 5,
+    creator: 'name name',
+    challenger: 'name name'
+  }
+]
 
 const INITIAL_STATE = {
   email: '',
   payload: '',
-  error: null
+  error: null,
+  value: ''
 }
 
-const Intro = () => (
-  <p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam quo earum ullam, facilis aliquid dolorum cum eos
-    sed consequatur a reiciendis sit accusantium explicabo impedit.
-  </p>
+const InlineStyle = () => (
+  <style>
+    {`
+    .container {
+      height: 100vh;
+      margin: auto;
+    }
+    .decor {
+      width: 100% !important;
+      color: black !important;
+      padding: 15px !important;
+      margin: 0px !important;
+      font-size: 48px;
+    }
+    .hero {
+      margin-top: 5% !important;
+      margin-bottom: 5% !important;
+      max-width: 850px !important;
+    }
+    .mainCard {
+      max-width: 220px;
+      height: 210px;
+    }
+    .thumbCard {
+      
+    }
+  `}
+  </style>
 )
+
+const thumbnails = testFeed.map(item => {
+  return (
+    <Grid.Column width={5} textAlign="left" key={item.id}>
+      <Segment stacked color="grey">
+        <Label attached="top left" color="grey" className="thumbCard font-effect-anaglyph">
+          {item.challenger}
+        </Label>
+        <br />
+        {item.description}
+      </Segment>
+    </Grid.Column>
+  )
+})
+
+const accentColor = 'red'
 
 class Landing extends Component {
   constructor(props) {
@@ -24,15 +112,16 @@ class Landing extends Component {
   onSubmit = event => {
     event.preventDefault()
     const { email, payload } = this.state
+    console.log(`Challenge: ${email} - ${payload}`)
     let url = `https://us-central1-fanger-app.cloudfunctions.net/emailBackend`
     let postFunction = fetch(url, {
       method: 'POST',
       mode: 'no-cors',
       body: `${email}, ${payload}`
     })
-    postFunction.then(response => {
+    postFunction.then(() => {
       this.setState({ email: '', payload: '' })
-      console.log(response)
+      this.resetForm()
     })
   }
 
@@ -40,7 +129,7 @@ class Landing extends Component {
     document.getElementById('challengeForm').reset()
   }
 
-  onChange = event => {
+  handleFormChange = event => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
@@ -49,47 +138,78 @@ class Landing extends Component {
     const isInvalid = email === '' || payload === ''
 
     return (
-      <Grid textAlign="center" verticalAlign="middle">
-        <Grid.Row style={{ maxWidth: 550 }}>
-          <Grid.Column style={{ paddingTop: '2em' }}>
-            <Header as="h2" textAlign="center">
-              You wanna play a game?
-            </Header>
-            <AuthUserContext.Consumer>
-              {authUser =>
-                authUser ? (
-                  <Segment stacked color="red">
-                    <Form onSubmit={this.onSubmit} id="challengeForm">
-                      <Form.Input
-                        fluid
-                        icon="user"
-                        iconPosition="left"
-                        name="email"
-                        value={email}
-                        onChange={this.onChange}
-                        type="text"
-                        placeholder="Email"
-                      />
-                      <Form.TextArea name="payload" onChange={this.onChange} type="text" />
-                      <Button
-                        fluid
-                        disabled={isInvalid}
-                        type="submit"
-                        color="black"
-                        content="Send"
-                        onClick={this.resetForm}
-                      />
-                      {error && <Message negative>{error.message}</Message>}
-                    </Form>
-                  </Segment>
-                ) : (
-                  <Intro />
-                )
-              }
-            </AuthUserContext.Consumer>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <div>
+        <InlineStyle />
+        {/* Decorative header */}
+        <div className="decor font-effect-anaglyph">
+          <Grid>
+            <Grid.Column floated="left" textAlign="left" width={8}>
+              +
+            </Grid.Column>
+            <Grid.Column floated="right" textAlign="right" width={8}>
+              +
+            </Grid.Column>
+          </Grid>
+        </div>
+        <AuthUserContext.Consumer>
+          {authUser =>
+            authUser ? (
+              <Container>
+                <Grid divided="vertically" centered stackable>
+                  <Grid.Row columns={2} className="hero">
+                    <Grid.Column width={4} textAlign="right">
+                      <span className="font-effect-anaglyph">FANGER</span> Lorem ipsum, dolor sit amet consectetur
+                      adipisicing elit. Veritatis labore nisi architecto tempora ullam magnam illum rerum quo nemo cum
+                      sequi qui distinctio nulla hic autem, quae delectus beatae accusamus?
+                    </Grid.Column>
+                    <Grid.Column width={8} textAlign="left">
+                      <Form onSubmit={this.onSubmit} id="challengeForm">
+                        <Segment raised color={accentColor} className="mainCard" attached>
+                          <Header as="h1" textAlign="center">
+                            <Header.Content>
+                              <span className="font-effect-anaglyph">c0d3tt4st0n3</span>
+                            </Header.Content>
+                          </Header>
+                          <Input
+                            fluid
+                            name="email"
+                            label={{ icon: 'at', color: accentColor }}
+                            labelPosition="left corner"
+                            placeholder="Email"
+                            onChange={this.handleFormChange}
+                          />
+                          <br />
+                          <Input
+                            fluid
+                            name="payload"
+                            label={{ icon: 'tasks', color: accentColor }}
+                            labelPosition="left corner"
+                            placeholder="Challenge"
+                            onChange={this.handleFormChange}
+                          />
+                          {error && <Message negative>{error.message}</Message>}
+                        </Segment>
+                        <Button
+                          disabled={isInvalid}
+                          onClick={this.onSubmit}
+                          attached="bottom"
+                          content="send"
+                          color={accentColor}
+                        />
+                      </Form>
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row columns={3} style={{ paddingTop: '2em', paddingBottom: '2em', margin: '0' }}>
+                    {thumbnails}
+                  </Grid.Row>
+                </Grid>
+              </Container>
+            ) : (
+              this.props.history.push(ROUTES.SIGN_IN)
+            )
+          }
+        </AuthUserContext.Consumer>
+      </div>
     )
   }
 }
