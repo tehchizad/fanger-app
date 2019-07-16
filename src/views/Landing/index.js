@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Input, Search, Label, Header, Message, Container, Segment, Button, Form } from 'semantic-ui-react'
+import { Grid, Input, Label, Header, Message, Container, Segment, Button, Form } from 'semantic-ui-react'
 import { AuthUserContext } from '../../utilities/Session'
 import * as ROUTES from '../../utilities/routes'
 

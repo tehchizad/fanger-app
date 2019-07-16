@@ -5,15 +5,13 @@ import {
   Button,
   IconButton,
   Input,
-  Avatar,
   FormHelperText,
   InputLabel,
   InputAdornment,
   CircularProgress,
-  FormControl,
-  Chip
+  FormControl
 } from '@material-ui/core'
-import { Visibility, VisibilityOff, Error, ThumbUp } from '@material-ui/icons'
+import { Visibility, VisibilityOff } from '@material-ui/icons'
 import { green } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core/styles'
 

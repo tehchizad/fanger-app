@@ -1,13 +1,11 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Container } from 'semantic-ui-react'
 
 import LandingPage from '../../views/Landing'
 import SignUpPage from '../../views/SignUp'
 import SignInPage from '../../views/SignIn'
 import PasswordForgetPage from '../../views/PasswordForget'
 import AccountPage from '../../views/Account'
-import Navigation from '../../components/Navigation'
 import * as ROUTES from '../../utilities/routes'
 import { withAuthentication } from '../../utilities/Session'
 
